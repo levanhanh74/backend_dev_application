@@ -22,8 +22,7 @@ namespace WEB_MANGE_COURCE.Models
             this.Students = new HashSet<Student>();
             this.Teachers = new HashSet<Teacher>();
         }
-
-        public static object Identity { get; internal set; }
+    
         public int ro_id { get; set; }
         public string ro_name { get; set; }
     

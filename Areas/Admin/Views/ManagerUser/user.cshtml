@@ -1,0 +1,50 @@
+﻿
+@model List<WEB_MANGE_COURCE.Models.Role>
+@{
+    ViewBag.Title = "user";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="container mt-5 ">
+    <div class="d-flex justify-content-center">
+        <img src="data:image/png;base64,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"
+             alt="">
+    </div>
+    <h3 class="text-center"> Register your account</h3>
+    <div class="col-5 m-auto">
+        <form method="post" action=@Url.Action("user", "ManagerUser")>
+            <div class="mb-3">
+                <select id="disabledSelect" name="ro_id" class="form-select">
+                    @foreach (var item in Model)
+                    {
+                        <option value="@item.ro_id">@item.ro_name</option>
+                    }
+                </select>
+            </div>
+            @*<div class="row">
+                    <div class="col-6 mb-3">
+                        <input type="text" id="disabledTextInput" name="username" class="form-control" placeholder="First Name...">
+                    </div>
+                    <div class="col-6 mb-3">
+                        <input type="text" id="disabledTextInput"  class="form-control" placeholder="Last Name...">
+                    </div>
+                </div>*@
+            <div class="mb-3">
+                <input type="text" id="disabledTextInput" name="username" class="form-control" placeholder="User Name...">
+            </div>
+            @*<div class="mb-3">
+                    <input type="text" id="disabledTextInput" name="email" class="form-control" placeholder="Gmail...">
+                </div>*@
+            <div class="mb-3">
+                <input type="text" id="disabledTextInput" name="password" class="form-control" placeholder="Password...">
+            </div>
+            <div class="mb-3">
+                <input type="text" id="disabledTextInput" name="confirmpass" class="form-control" placeholder="Re-enter password...">
+            </div>
+            <div class="mb-3">
+                <input type="hidden" id="disabledTextInput" name="image" class="form-control" placeholder="Re-enter password...">
+            </div>
+
+            <button type="submit" class="btn bg-black text-white w-100">Confirm</button>
+        </form>
+    </div>
+</div>

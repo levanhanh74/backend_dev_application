@@ -1,0 +1,50 @@
+﻿@model IEnumerable<WEB_MANGE_COURCE.Models.Admin>
+
+@{
+    ViewBag.Title = "profileAdmin";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var user = HttpContext.Current.Session["user"];
+
+}
+
+<h2>profileAdmin</h2>
+<form method="post" enctype="multipart/form-data" action="@Url.Action("profileAdmin")">
+    <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">UserName</label>
+        @if (user != null)
+        {
+            if (user is WEB_MANGE_COURCE.Models.Admin admin && admin.ro_id == 1)
+            {
+                <input type="text" name="username" value="@admin.username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+
+            }
+            else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 3)
+            {
+                <input type="text" name="username" value="@employ.username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            }
+        }
+    </div>
+    <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        @if (user != null)
+        {
+            if (user is WEB_MANGE_COURCE.Models.Admin admin && admin.ro_id == 1)
+            {
+                <input type="text" name="password" value="@admin.password" class="form-control" id="exampleInputPassword1">
+
+            }
+            else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 3)
+            {
+                <input type="text" name="password" value="@employ.password" class="form-control" id="exampleInputPassword1">
+            }
+        }
+    </div>
+    <div class="mb-3 form-check">
+        <label class="form-label" for="exampleInputPassword12">Image</label>
+        <input type="file" name="image" class="form-input inputFile" id="exampleInputPassword12 " ><br />
+        <img id="output" src="" />
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+

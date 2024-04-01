@@ -10,16 +10,10 @@
 namespace WEB_MANGE_COURCE.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Admin
+    public partial class sp_helpdiagramdefinition_Result
     {
-        public int ad_id { get; set; }
-        public string username { get; set; }
-        public string password { get; set; }
-        public Nullable<int> ro_id { get; set; }
-        public string image { get; set; }
-    
-        public virtual Role Role { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

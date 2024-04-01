@@ -1,0 +1,40 @@
+﻿@model List<WEB_MANGE_COURCE.Models.UserViewModel>
+@{
+    ViewBag.Title = "listuser";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>listuser</h2>
+<p>
+    @Html.ActionLink("Create New", "user", "ManagerUser")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model[0].Username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model[0].Password)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model[0].Role)
+        </th>
+    </tr>
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Username)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Password)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Role)
+                </td>
+            </tr>
+        }
+    }
+</table>

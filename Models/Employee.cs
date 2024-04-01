@@ -19,6 +19,7 @@ namespace WEB_MANGE_COURCE.Models
         public string password { get; set; }
         public string email { get; set; }
         public Nullable<int> ro_id { get; set; }
+        public string image { get; set; }
     
         public virtual Role Role { get; set; }
     }

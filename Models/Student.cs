@@ -28,6 +28,7 @@ namespace WEB_MANGE_COURCE.Models
         public Nullable<int> ro_id { get; set; }
         public Nullable<int> class_id { get; set; }
         public Nullable<int> course_id { get; set; }
+        public string image { get; set; }
     
         public virtual Class Class { get; set; }
         public virtual Cours Cours { get; set; }

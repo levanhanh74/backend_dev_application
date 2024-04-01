@@ -1,0 +1,39 @@
+﻿@model IEnumerable<WEB_MANGE_COURCE.Models.Category>
+
+@{
+    ViewBag.Title = "list";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>list</h2>
+
+<p>
+    @Html.ActionLink("Create New", "category")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.category_id)
+            @Html.DisplayNameFor(model => model.cate_name)
+        </th>
+        <th></th>
+    </tr>
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.category_id)
+                    @Html.DisplayFor(modelItem => item.cate_name)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.category_id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.category_id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.category_id })
+                </td>
+            </tr>
+        }
+    }
+
+</table>

@@ -40,6 +40,7 @@ namespace WEB_MANGE_COURCE.Controllers
                 if (role != null && admin.ro_id == role.ro_id)
                 {
                     // xác thực thành công, chuyển hướng đến trang homeadmin
+                    Session["user"] = admin;
                     return RedirectToAction("Index", "HomeAdmin", new {area
                     = "Admin"});
                 }
@@ -52,10 +53,11 @@ namespace WEB_MANGE_COURCE.Controllers
                 if (role != null && employees.ro_id == role.ro_id)
                 {
                     // xác thực thành công, chuyển hướng đến trang homeadmin
-                    return RedirectToAction("Index", "HomeEmployee", new
+                    Session["user"] = employees;
+                    return RedirectToAction("Index", "HomeAdmin", new
                     {
                         area
-                    = "EmployeeTrainner"
+                    = "Admin"
                     });
                 }
             }
@@ -68,11 +70,8 @@ namespace WEB_MANGE_COURCE.Controllers
                 if (role != null && teachers.ro_id == role.ro_id)
                 {
                     // xác thực thành công, chuyển hướng đến trang homeadmin
-                    return RedirectToAction("Index", "HomeTeacher", new
-                    {
-                        area
-                    = "Teacher"
-                    });
+                    Session["user"] = teachers;
+                    return RedirectToAction("HomeStudent");
                 }
             }
             else if (students != null && VerifyPassword(students.password, password))
@@ -83,6 +82,8 @@ namespace WEB_MANGE_COURCE.Controllers
                 // kiểm tra xem người dùng có vai trò được chỉ định không
                 if (role != null && students.ro_id == role.ro_id)
                 {
+
+                    Session["user"] = students;
                     // xác thực thành công, chuyển hướng đến trang homeadmin
                     return RedirectToAction("HomeStudent");
                 }

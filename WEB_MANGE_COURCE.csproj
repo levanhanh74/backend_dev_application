@@ -130,11 +130,13 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ClassController.cs" />
+    <Compile Include="Areas\Admin\Controllers\CourseController.cs" />
+    <Compile Include="Areas\Admin\Controllers\EnrollmentController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ErrorController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
-    <Compile Include="Areas\EmployeeTrainner\Controllers\HomeEmployeeController.cs" />
-    <Compile Include="Areas\EmployeeTrainner\EmployeeTrainnerAreaRegistration.cs" />
-    <Compile Include="Areas\Teacher\Controllers\HomeTeacherController.cs" />
-    <Compile Include="Areas\Teacher\TeacherAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\ManagerUserController.cs" />
     <Compile Include="Controllers\HomeStudentController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -148,6 +150,7 @@
     <Compile Include="Models\Class.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Models\Cours.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -176,6 +179,12 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Schedule.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Student.cs">
@@ -250,8 +259,6 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Areas\Admin\Views\web.config" />
-    <Content Include="Areas\EmployeeTrainner\Views\web.config" />
-    <Content Include="Areas\Teacher\Views\web.config" />
     <Content Include="assets\bootstrap-5.3.3-dist\css\bootstrap-grid.css.map" />
     <Content Include="assets\bootstrap-5.3.3-dist\css\bootstrap-grid.min.css.map" />
     <Content Include="assets\bootstrap-5.3.3-dist\css\bootstrap-grid.rtl.css.map" />
@@ -284,12 +291,17 @@
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\HomeAdmin\Index.cshtml" />
-    <Content Include="Areas\EmployeeTrainner\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\EmployeeTrainner\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Teacher\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Teacher\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Teacher\Views\HomeTeacher\Index.cshtml" />
-    <Content Include="Areas\EmployeeTrainner\Views\HomeEmployee\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\HomeAdmin\profileAdmin.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\list.cshtml" />
+    <Content Include="Areas\Admin\Views\Course\course.cshtml" />
+    <Content Include="Areas\Admin\Views\Course\list.cshtml" />
+    <Content Include="Areas\Admin\Views\Class\list.cshtml" />
+    <Content Include="Areas\Admin\Views\Enrollment\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Enrollment\list.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\category.cshtml" />
+    <Content Include="Areas\Admin\Views\Class\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerUser\user.cshtml" />
+    <Content Include="Areas\Admin\Views\ManagerUser\listuser.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -318,8 +330,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\EmployeeTrainner\Data\" />
-    <Folder Include="Areas\Teacher\Data\" />
+    <Folder Include="Areas\Admin\Views\Error\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />
