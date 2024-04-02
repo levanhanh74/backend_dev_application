@@ -137,6 +137,7 @@
     <Compile Include="Areas\Admin\Controllers\ErrorController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\ManagerUserController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ScheduleController.cs" />
     <Compile Include="Controllers\HomeStudentController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -150,6 +151,10 @@
     <Compile Include="Models\Class.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Schedule.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\scheduleQuery.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Models\Cours.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -176,9 +181,6 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Role.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Schedule.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
@@ -302,6 +304,8 @@
     <Content Include="Areas\Admin\Views\Class\Index.cshtml" />
     <Content Include="Areas\Admin\Views\ManagerUser\user.cshtml" />
     <Content Include="Areas\Admin\Views\ManagerUser\listuser.cshtml" />
+    <Content Include="Areas\Admin\Views\Schedule\schedule.cshtml" />
+    <Content Include="Areas\Admin\Views\Schedule\listschedule.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
