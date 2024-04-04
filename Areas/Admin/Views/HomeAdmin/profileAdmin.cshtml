@@ -1,13 +1,11 @@
 ﻿@model IEnumerable<WEB_MANGE_COURCE.Models.Admin>
 
 @{
-    ViewBag.Title = "profileAdmin";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
     var user = HttpContext.Current.Session["user"];
-
+    ViewBag.Title = "profileAdmin";
 }
 
-<h2>profileAdmin</h2>
 <form method="post" enctype="multipart/form-data" action="@Url.Action("profileAdmin")">
     <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">UserName</label>
@@ -41,7 +39,7 @@
     </div>
     <div class="mb-3 form-check">
         <label class="form-label" for="exampleInputPassword12">Image</label>
-        <input type="file" name="image" class="form-input inputFile" id="exampleInputPassword12 " ><br />
+        <input type="file" name="image" class="form-input inputFile" id="exampleInputPassword12 "><br />
         <img id="output" src="" />
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>

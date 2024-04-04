@@ -139,6 +139,7 @@
     <Compile Include="Areas\Admin\Controllers\ManagerUserController.cs" />
     <Compile Include="Areas\Admin\Controllers\ScheduleController.cs" />
     <Compile Include="Controllers\HomeStudentController.cs" />
+    <Compile Include="Controllers\TeacherController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -151,6 +152,7 @@
     <Compile Include="Models\Class.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\queryscheduleStudent.cs" />
     <Compile Include="Models\Schedule.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -306,6 +308,8 @@
     <Content Include="Areas\Admin\Views\ManagerUser\listuser.cshtml" />
     <Content Include="Areas\Admin\Views\Schedule\schedule.cshtml" />
     <Content Include="Areas\Admin\Views\Schedule\listschedule.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\row2.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\row3.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -330,6 +334,12 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\HomeStudent\Login.cshtml" />
     <Content Include="Views\HomeStudent\HomeStudent.cshtml" />
+    <Content Include="Views\HomeStudent\schedule.cshtml" />
+    <Content Include="Views\Shared\nav_bar.cshtml" />
+    <Content Include="Views\HomeStudent\profile.cshtml" />
+    <Content Include="Views\Shared\header_right_account.cshtml" />
+    <Content Include="Views\Teacher\Index.cshtml" />
+    <Content Include="Views\Teacher\profile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

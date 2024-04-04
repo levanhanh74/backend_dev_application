@@ -76,46 +76,61 @@ namespace WEB_MANGE_COURCE.Areas.Admin.Controllers
             var user  = Session["user"];
             if(user != null)
             {
-                if(user is WEB_MANGE_COURCE.Models.Admin admin && admin.ad_id == 1)
+                if(user is WEB_MANGE_COURCE.Models.Admin admin && admin.ro_id == 1)
                 {
                     // Upload 
                     if (image != null && image.ContentLength > 0)
                     {
-                        var fileName = Path.GetFileName(image.FileName);
-                        var path = Path.Combine(Server.MapPath("~/Uploads/"), fileName);
-                        // Tạo thư mục nếu chưa tồn tại
-                        Directory.CreateDirectory(Server.MapPath("~/Uploads/"));
-                        // Lưu hình ảnh
-                        image.SaveAs(path);
-                        admin.username = username;
-                        admin.password = password;
-                        admin.image = fileName;
-                        Session["user"] = admin;
-                        db.SaveChanges();
-                        return RedirectToAction("Index");
-
+                        var userID = db.Admins.Find(admin.ad_id);
+                        if(userID   != null)
+                        {
+                            var fileName = Path.GetFileName(image.FileName);
+                            var path = Path.Combine(Server.MapPath("~/Uploads/"), fileName);
+                            // Tạo thư mục nếu chưa tồn tại
+                            Directory.CreateDirectory(Server.MapPath("~/Uploads/"));
+                            // Lưu hình ảnh
+                            image.SaveAs(path);
+                            userID.username = username;
+                            userID.password = password;
+                            userID.image = fileName;
+                            Session["user"] = userID;
+                            db.Entry(userID).State = System.Data.Entity.EntityState.Modified;
+                            db.SaveChanges();
+                            return RedirectToAction("Index");
+                        }
+                        return HttpNotFound();
                     }
                     return View(username, password, image);
                     
-                }else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.emp_id == 3)
+                }else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 3)
                 {
                     if (image != null && image.ContentLength > 0)
                     {
-                        var fileName = Path.GetFileName(image.FileName);
-                        var path = Path.Combine(Server.MapPath("~/Uploads/"), fileName);
-                        // Tạo thư mục nếu chưa tồn tại
-                        Directory.CreateDirectory(Server.MapPath("~/Uploads/"));
-                        // Lưu hình ảnh
-                        image.SaveAs(path);
-                        employ.username = username;
-                        employ.password = password;
-                        employ.image = fileName;
-                        Session["user"] = employ;
-                        db.SaveChanges();
-                        return RedirectToAction("Index");
+                        var userID = db.Employees.Find(employ.emp_id);
+                        if (userID != null)
+                        {
+                            var fileName = Path.GetFileName(image.FileName);
+                            var path = Path.Combine(Server.MapPath("~/Uploads/"), fileName);
+                            // Tạo thư mục nếu chưa tồn tại
+                            Directory.CreateDirectory(Server.MapPath("~/Uploads/"));
+                            // Lưu hình ảnh
+                            image.SaveAs(path);
+                            userID.username = username;
+                            userID.password = password;
+                            userID.image = fileName;
+                            Session["user"] = userID;
+                            db.Entry(userID).State = System.Data.Entity.EntityState.Modified;
+                            db.SaveChanges();
+                            return RedirectToAction("Index");
+                        }
+                        return HttpNotFound();
 
                     }
                     return View(username, password, image);
+                }
+                else
+                {
+                    return RedirectToAction("Error", "Error", new { area = "" });
                 }
             }
             return RedirectToAction("Login", "HomeStudent", new { area = "" });
@@ -126,14 +141,14 @@ namespace WEB_MANGE_COURCE.Areas.Admin.Controllers
             var user = Session["user"];
             if (user != null)
             {
-                if (user is WEB_MANGE_COURCE.Models.Admin admin && admin.ad_id == 1)
+                if (user is WEB_MANGE_COURCE.Models.Admin admin && admin.ro_id == 1)
                 {
                     // Xóa Session user
                     Session.Remove("user");
                     // Đăng xuất Forms Authentication
                     FormsAuthentication.SignOut();
                 }
-                else if (user is WEB_MANGE_COURCE.Models.Employee empoly && empoly.emp_id == 3)
+                else if (user is WEB_MANGE_COURCE.Models.Employee empoly && empoly.ro_id == 3)
                 {
                     // Xóa Session user
                     Session.Remove("user");

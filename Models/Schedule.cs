@@ -23,6 +23,7 @@ namespace WEB_MANGE_COURCE.Models
         public Nullable<System.TimeSpan> end_time { get; set; }
         public string day_of_week { get; set; }
         public string status { get; set; }
+        public Nullable<System.DateTime> date_week { get; set; }
     
         public virtual Class Class { get; set; }
         public virtual Cours Cours { get; set; }

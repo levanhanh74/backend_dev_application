@@ -79,6 +79,7 @@
           <Property Name="end_time" Type="time" Precision="7" />
           <Property Name="day_of_week" Type="nvarchar" MaxLength="20" />
           <Property Name="status" Type="nvarchar" MaxLength="50" />
+          <Property Name="date_week" Type="date" />
         </EntityType>
         <EntityType Name="Students">
           <Key>
@@ -515,6 +516,7 @@
           <NavigationProperty Name="Cours" Relationship="Self.FK__Schedule__course__5DCAEF64" FromRole="Schedule" ToRole="Courses" />
           <NavigationProperty Name="Student" Relationship="Self.FK__Schedule__studen__5CD6CB2B" FromRole="Schedule" ToRole="Students" />
           <NavigationProperty Name="Teacher" Relationship="Self.FK__Schedule__teache__5BE2A6F2" FromRole="Schedule" ToRole="Teachers" />
+          <Property Name="date_week" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="Student">
           <Key>
@@ -948,6 +950,7 @@
           <EntitySetMapping Name="Schedules">
             <EntityTypeMapping TypeName="ma_scschedulesModel.Schedule">
               <MappingFragment StoreEntitySet="Schedule">
+                <ScalarProperty Name="date_week" ColumnName="date_week" />
                 <ScalarProperty Name="schedule_id" ColumnName="schedule_id" />
                 <ScalarProperty Name="teacher_id" ColumnName="teacher_id" />
                 <ScalarProperty Name="student_id" ColumnName="student_id" />

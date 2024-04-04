@@ -1,0 +1,96 @@
+﻿@{
+    var user = HttpContext.Current.Session["user"];
+}
+<div class="row">
+    <div class="col-6">
+        icon
+    </div>
+    <div class="col-6">
+        <ul class="navbar-nav flex-row d-flex justify-content-end me-3">
+            <li class="nav-item active p-2">
+                @if (user != null)
+                {
+                    if (user is WEB_MANGE_COURCE.Models.Admin admin && admin.ro_id == 1)
+                    {
+                        <img src="@Url.Content("~/Uploads/" + admin.image)" style="height: 40px; width: 40px; border-radius: 50%;" />
+                    }
+                    else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 3)
+                    {
+                        <img src="@Url.Content("~/Uploads/" + employ.image)" style="height: 40px; width: 40px; border-radius: 50%;" />
+                    }
+                    else if (user is WEB_MANGE_COURCE.Models.Teacher teacher && teacher.ro_id == 4)
+                    {
+                        <img src="@Url.Content("~/Uploads/" + teacher.image)" style="height: 40px; width: 40px; border-radius: 50%;" />
+                    }
+                    else if (user is WEB_MANGE_COURCE.Models.Student student && student.ro_id == 5)
+                    {
+                        <img src="@Url.Content("~/Uploads/" + student.image)" style="height: 40px; width: 40px; border-radius: 50%;" />
+                    }
+                }
+            </li>
+            <li class="nav-itemdropdown p-2">
+                <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    @if (user != null)
+                    {
+                        if (user is WEB_MANGE_COURCE.Models.Admin admin && admin.ro_id == 1)
+                        {
+                            @admin.username
+                        }
+                        else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 3)
+                        {
+                            @employ.username
+                        }
+                        else if (user is WEB_MANGE_COURCE.Models.Teacher teacher && teacher.ro_id == 4)
+                        {
+                            @teacher.username
+                        }
+                        else if (user is WEB_MANGE_COURCE.Models.Student student && student.ro_id == 5)
+                        {
+                            @student.username
+                        }
+
+                    }
+                </button>
+                <ul class="dropdown-menu dropdown-menu-dark">
+                    <li>
+                        @if (user != null)
+                        {
+                            if  (user is WEB_MANGE_COURCE.Models.Teacher teacher && teacher.ro_id == 4)
+                            {
+                                <a class="dropdown-item" href="~/Teacher/profile">Profile</a>
+                            }
+                            else if (user is WEB_MANGE_COURCE.Models.Student student && student.ro_id == 5)
+                            {
+                                <a class="dropdown-item" href="~/HomeStudent/profile">Profile</a>
+                            }
+                        }
+
+
+
+                    </li>
+                    <li>
+                        @if (user != null)
+                        {
+                            if (user is WEB_MANGE_COURCE.Models.Admin admin && admin.ro_id == 1)
+                            {
+                                <a class="dropdown-item" href="@Url.Action("Logout", "HomeAdmin", new { area = "Admin" })">Logout</a>
+                            }
+                            else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 3)
+                            {
+                                <a class="dropdown-item" href="@Url.Action("Logout", "HomeAdmin", new { area = "Admin" })">Logout</a>
+                            }
+                            else if (user is WEB_MANGE_COURCE.Models.Teacher teacher && teacher.ro_id == 4)
+                            {
+                                <a class="dropdown-item" href="@Url.Action("Logout", "Teacher", new { area = "" })">Logout</a>
+                            }
+                            else if (user is WEB_MANGE_COURCE.Models.Student student && student.ro_id == 5)
+                            {
+                                <a class="dropdown-item" href="@Url.Action("Logout", "HomeStudent", new { area = "" })">Logout</a>
+                            }
+                        }
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
