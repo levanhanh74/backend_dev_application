@@ -125,8 +125,11 @@ namespace WEB_MANGE_COURCE.Controllers
             }
             return RedirectToAction("Login", "HomeStudent", new { area = "" });
         }
+
+   
         public ActionResult schedule()
         {
+
             var user = Session["user"];
             if (user != null)
             {
@@ -145,20 +148,23 @@ namespace WEB_MANGE_COURCE.Controllers
                     return RedirectToAction("Index", "Teacher", new {area=""});
                 }  else if (user is WEB_MANGE_COURCE.Models.Student student && student.ro_id == 5)
                 {
-                    DateTime currentDate = DateTime.Now;
 
-                    // Tìm ngày đầu tiên của tuần (ngày hiện tại là ngày giữa tuần)
-                    DateTime startDate = currentDate.AddDays(-(int)currentDate.DayOfWeek);
+                    var query = (from Schedule in db.Schedules
+                                 join Class in db.Classes on Schedule.class_id equals Class.class_id
+                                 join Course in db.Courses on Schedule.course_id equals Course.course_id
+                                 join Teacher in db.Teachers on Schedule.teacher_id equals Teacher.teacher_id
+                                 join Student in db.Students on Schedule.student_id equals Student.student_id
+                                 select new ScheduleInfo {
+                                    Schedule = Schedule,
+                                    Teacher = Teacher,
+                                    Student = Student,
+                                    Course = Course,
+                                    Class = Class
+                                 }).ToList();
 
-                    // Tạo danh sách các ngày trong tuần từ ngày đầu tiên
-                    List<DateTime> weekDates = new List<DateTime>();
-                    for (int i = 0; i < 7; i++)
-                    {
-                        weekDates.Add(startDate.AddDays(i));
-                    }
 
 
-                    return View(weekDates);
+                    return View(query);
                 }
             }
             return RedirectToAction("Login", "HomeStudent", new { area = "" });

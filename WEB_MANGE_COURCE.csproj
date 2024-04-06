@@ -156,6 +156,7 @@
     <Compile Include="Models\Schedule.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ScheduleInfo.cs" />
     <Compile Include="Models\scheduleQuery.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Models\Cours.cs">
