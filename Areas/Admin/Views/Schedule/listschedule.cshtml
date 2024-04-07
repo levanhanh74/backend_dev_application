@@ -1,4 +1,4 @@
-﻿@model IEnumerable<WEB_MANGE_COURCE.Models.Schedule>
+﻿﻿@model IEnumerable<WEB_MANGE_COURCE.Models.Schedule>
 
 @{
     ViewBag.Title = "listschedule";
@@ -23,6 +23,7 @@
                 <th>Course Title</th>
                 <th>Student Username</th>
                 <th>Teacher Username</th>
+                <th>Day-Week</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -38,6 +39,7 @@
                     <td>@Html.DisplayFor(modelItem => item.Cours.title)</td>
                     <td>@Html.DisplayFor(modelItem => item.Student.username)</td>
                     <td>@Html.DisplayFor(modelItem => item.Teacher.username)</td>
+                    <td>@Html.DisplayFor(modelItem => item.date_week)</td>
                     <td>
                         @Html.ActionLink("Edit", "Edit", new { id = item.schedule_id }, new { @class = "btn btn-primary" })
                         @Html.ActionLink("Details", "Details", new { id = item.schedule_id }, new { @class = "btn btn-info" })
