@@ -1,55 +1,45 @@
 ﻿@model IEnumerable<WEB_MANGE_COURCE.Models.Cours>
 
 @{
-    ViewBag.Title = "list";
+    ViewBag.Title = "Course List";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>list</h2>
+<div class="container">
+    <h2>Course List</h2>
 
-<p>
-    @Html.ActionLink("Create New", "course")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.course_id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.description)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Category.cate_name)
-        </th>
-        <th></th>
-    </tr>
-    @if (Model != null)
-    {
-        foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.course_id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Category.cate_name)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.course_id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.course_id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.course_id })
-                </td>
-            </tr>
-        }
-    }
-
-</table>
+    <div class="row">
+        <div class="col-md-12">
+            <p>
+                @Html.ActionLink("Create New", "Course", null, new { @class = "btn btn-primary" })
+            </p>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Course ID</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Category</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(modelItem => item.course_id)</td>
+                            <td>@Html.DisplayFor(modelItem => item.title)</td>
+                            <td>@Html.DisplayFor(modelItem => item.description)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Category.cate_name)</td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.course_id }, new { @class = "btn btn-primary btn-sm" }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.course_id }, new { @class = "btn btn-info btn-sm" }) |
+                                @Html.ActionLink("Delete", "Delete", new { id = item.course_id }, new { @class = "btn btn-danger btn-sm" })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

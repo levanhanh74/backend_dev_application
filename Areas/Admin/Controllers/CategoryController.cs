@@ -91,11 +91,12 @@ namespace WEB_MANGE_COURCE.Areas.Admin.Controllers
             }
             else if (user is WEB_MANGE_COURCE.Models.Employee useremploy && useremploy.ro_id == 3)
             {
-                return View();
+                var listCate = db.Categories.ToList();
+                return View(listCate);
             }
             else if (user is WEB_MANGE_COURCE.Models.Admin teacher && teacher.ro_id == 4)
             {
-                return RedirectToAction("Index", "HomeTeacher", new { area = "Teacher" });
+                return RedirectToAction("Index", "Teacher", new { area = "" });
             }
             else
             {

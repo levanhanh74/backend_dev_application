@@ -20,7 +20,13 @@ namespace WEB_MANGE_COURCE.Areas.Admin.Controllers
             {
                 if(user is WEB_MANGE_COURCE.Models.Admin admin && admin.ro_id == 1)
                 {
-                     return View();
+                    var teachers = db.Teachers.ToList();
+                    ViewBag.TeacherList = new SelectList(teachers, "teacher_id", "username"); // Assuming FullName is the property representing teacher's name
+                    var courses = db.Courses.ToList();
+                    ViewBag.CourseList = new SelectList(courses, "course_id", "title"); // Assuming CourseName is the property representing course's name
+                    var students = db.Students.ToList();
+                    ViewBag.StudentList = new SelectList(students, "student_id", "username"); // Assuming FullName is the property representing student's 
+                    return View();
                 }else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 3)
                 {
                     return RedirectToAction("Error", "Error", new {area ="Admin"});

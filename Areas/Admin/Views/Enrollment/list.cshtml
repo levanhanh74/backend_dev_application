@@ -1,49 +1,39 @@
 ﻿@model IEnumerable<WEB_MANGE_COURCE.Models.Enrollment>
 
 @{
-    ViewBag.Title = "list";
+    ViewBag.Title = "Enrollment List";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>list</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Index")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Cours.course_id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Student.student_id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Teacher.teacher_id)
-        </th>
-        <th></th>
-    </tr>
-    @if (Model != null)
-    {
-        foreach (var item in Model)
-        {
+<div class="container">
+    <h2>Enrollment List</h2>
+    <p>
+        @Html.ActionLink("Create New", "Index", null, new { @class = "btn btn-primary" })
+    </p>
+    <table class="table table-striped">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Cours.course_id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Student.student_id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Teacher.teacher_id)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.enm_id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.enm_id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.enm_id })
-                </td>
+                <th>Course ID</th>
+                <th>Student ID</th>
+                <th>Teacher ID</th>
+                <th>Action</th>
             </tr>
-        }
-    }
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Cours.course_id)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Student.student_id)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Teacher.teacher_id)</td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.enm_id }, new { @class = "btn btn-info btn-sm" })
+                        @Html.ActionLink("Details", "Details", new { id = item.enm_id }, new { @class = "btn btn-primary btn-sm" })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.enm_id }, new { @class = "btn btn-danger btn-sm" })
+                    </td>
+                </tr>
 
+            }
+            </tbody>
 </table>
+</div>
