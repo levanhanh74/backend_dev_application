@@ -1,6 +1,8 @@
 ﻿    using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using WEB_MANGE_COURCE.Models;
@@ -9,7 +11,26 @@ namespace WEB_MANGE_COURCE.Areas.Admin.Controllers
 {
     public class ManagerUserController : Controller
     {
-        private ma_scschedulesEntities1 db = new ma_scschedulesEntities1();
+        private ma_scschedulesEntities2 db = new ma_scschedulesEntities2();
+
+
+        // Method to hash password
+        public static string GetMd5Hash(string input)
+        {
+            using (MD5 md5Hash = MD5.Create())
+            {
+                byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
+
+                StringBuilder sBuilder = new StringBuilder();
+                for (int i = 0; i < data.Length; i++)
+                {
+                    sBuilder.Append(data[i].ToString("x2"));
+                }
+
+                return sBuilder.ToString();
+            }
+        }
+
         // GET: Admin/ManagerUser
         // only admin access add user 
         public ActionResult user()
@@ -22,11 +43,11 @@ namespace WEB_MANGE_COURCE.Areas.Admin.Controllers
                     var role = db.Roles.ToList();
                     return View(role);
                 }
-                else if (user is WEB_MANGE_COURCE.Models.Employee useremploy && useremploy.ro_id == 3)
+                else if (user is WEB_MANGE_COURCE.Models.Employee useremploy && useremploy.ro_id == 2)
                 {
                     return RedirectToAction("Error", "Error", new { area = "Admin" });
                 }
-                else if (user is WEB_MANGE_COURCE.Models.Teacher teacher && teacher.ro_id == 4)
+                else if (user is WEB_MANGE_COURCE.Models.Teacher teacher && teacher.ro_id == 3)
                 {
                     return RedirectToAction("Error", "Error", new { area = "Admin" });
                 }
@@ -59,32 +80,32 @@ namespace WEB_MANGE_COURCE.Areas.Admin.Controllers
                             if (ro_id == 1)
                             {
                                 int id_ad = new Random().Next(1, 1000);
-                                db.Admins.Add(new Models.Admin { username = username, password = password, image = image, ro_id = ro_id, ad_id = id_ad });
+                                db.Admins.Add(new Models.Admin { username = username, password = GetMd5Hash(password), image = image, ro_id = ro_id, ad_id = id_ad });
                                 db.SaveChanges();
                                 return RedirectToAction("listuser", "ManagerUser");
 
                             }
                             // add employee
-                            else if (ro_id == 3)
+                            else if (ro_id == 2)
                             {
                                 int id_em = new Random().Next(1, 1000);
-                                db.Employees.Add(new Models.Employee { username = username, password = password, image = image, ro_id = ro_id, emp_id = id_em });
+                                db.Employees.Add(new Models.Employee { username = username, password = GetMd5Hash(password), image = image, ro_id = ro_id, emp_id = id_em });
                                 db.SaveChanges();
                                 return RedirectToAction("listuser", "ManagerUser");
                             }
                             // add teacher
-                            else if (ro_id == 4)
+                            else if (ro_id == 3)
                             {
                                 int id_te = new Random().Next(1, 1000);
-                                db.Teachers.Add(new Models.Teacher { username = username, password = password, image = image, ro_id = ro_id, teacher_id = id_te });
+                                db.Teachers.Add(new Models.Teacher { username = username, password = GetMd5Hash(password), image = image, ro_id = ro_id, teacher_id = id_te });
                                 db.SaveChanges();
                                 return RedirectToAction("listuser", "ManagerUser");
                             }
                             // add student
-                            else if (ro_id == 5)
+                            else if (ro_id == 4)
                             {
                                 int id_st = new Random().Next(1, 1000);
-                                db.Students.Add(new Models.Student { username = username, password = password, image = image, ro_id = ro_id, student_id = id_st });
+                                db.Students.Add(new Models.Student { username = username, password = GetMd5Hash(password), image = image, ro_id = ro_id, student_id = id_st });
                                 db.SaveChanges();
                                 return RedirectToAction("listuser", "ManagerUser");
                             }
@@ -104,17 +125,17 @@ namespace WEB_MANGE_COURCE.Areas.Admin.Controllers
                     }
                 }
                 // employ khong duoc add 
-                else if (user is WEB_MANGE_COURCE.Models.Employee employee && employee.ro_id == 3)
+                else if (user is WEB_MANGE_COURCE.Models.Employee employee && employee.ro_id == 2)
                 {
                     return RedirectToAction("Index", "HomeAdmin", new { area = "Admin" });
                 }
                 // teacher khong duoc add
-                else if (user is WEB_MANGE_COURCE.Models.Teacher teacher && teacher.ro_id == 4)
+                else if (user is WEB_MANGE_COURCE.Models.Teacher teacher && teacher.ro_id == 3)
                 {
                     return RedirectToAction("HomeStudent", "HomeStudent", new { area = "" });
                 }
                 // student khong duoc add
-                else if (user is WEB_MANGE_COURCE.Models.Student student && student.ro_id == 5)
+                else if (user is WEB_MANGE_COURCE.Models.Student student && student.ro_id == 4)
                 {
                     return RedirectToAction("HomeStudent", "HomeStudent", new { area = "" });
                 }
@@ -150,7 +171,7 @@ namespace WEB_MANGE_COURCE.Areas.Admin.Controllers
                     // Truyền danh sách người dùng đã kết hợp đến view để hiển thị
                     return View(userList);
                 }// list user employ
-                else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 3)
+                else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 2)
                 {
                     var adminList = db.Admins.ToList();
                     var employList = db.Employees.ToList();
@@ -165,7 +186,7 @@ namespace WEB_MANGE_COURCE.Areas.Admin.Controllers
                     // Truyền danh sách người dùng đã kết hợp đến view để hiển thị
                     return View(userList);
                 } // not list user teacher 
-                else if(user is WEB_MANGE_COURCE.Models.Teacher teacher && teacher.ro_id == 4)
+                else if(user is WEB_MANGE_COURCE.Models.Teacher teacher && teacher.ro_id == 3)
                 {
                     return RedirectToAction("Error", "Error", new { area = "" });
                 } // not list user student 

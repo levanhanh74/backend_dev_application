@@ -24,17 +24,13 @@
                             <input type="text" name="username" value="@admin.username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
 
                         }
-                        else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 3)
+                        else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 2)
                         {
                             <input type="text" name="username" value="@employ.username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                         }
-                        else if (user is WEB_MANGE_COURCE.Models.Teacher teacher && teacher.ro_id == 4)
+                        else if (user is WEB_MANGE_COURCE.Models.Teacher teacher && teacher.ro_id == 3)
                         {
                             <input type="text" name="username" value="@teacher.username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                        }
-                        else if (user is WEB_MANGE_COURCE.Models.Student student && student.ro_id == 5)
-                        {
-                            <input type="text" name="username" value="@student.username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                         }
                     }
                 </div>
@@ -47,17 +43,13 @@
                             <input type="text" name="password" value="@admin.password" class="form-control" id="exampleInputPassword1">
 
                         }
-                        else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 3)
+                        else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 2)
                         {
                             <input type="text" name="password" value="@employ.password" class="form-control" id="exampleInputPassword1">
                         }
-                        else if (user is WEB_MANGE_COURCE.Models.Teacher teacher && teacher.ro_id == 4)
+                        else if (user is WEB_MANGE_COURCE.Models.Teacher teacher && teacher.ro_id == 3)
                         {
-                            <input type="text" name="username" value="@teacher.password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                        }
-                        else if (user is WEB_MANGE_COURCE.Models.Student student && student.ro_id == 5)
-                        {
-                            <input type="text" name="password" value="@student.password" class="form-control" id="exampleInputPassword1">
+                            <input type="password" name="password" value="@teacher.password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                         }
                     }
                 </div>

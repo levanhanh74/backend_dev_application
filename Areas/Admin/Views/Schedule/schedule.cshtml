@@ -64,10 +64,10 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.day_of_week, "Day of Week", htmlAttributes: new { @class = "control-label" })
+                @Html.LabelFor(model => model.date_week, "Day of Week", htmlAttributes: new { @class = "control-label" })
                 <div>
-                    @Html.EditorFor(model => model.day_of_week, new { htmlAttributes = new { @class = "form-control", placeholder = "Day of Week" } })
-                    @Html.ValidationMessageFor(model => model.day_of_week, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.date_week, new { htmlAttributes = new { @class = "form-control", placeholder = "Day of Week" } })
+                    @Html.ValidationMessageFor(model => model.date_week, "", new { @class = "text-danger" })
                 </div>
             </div>
 

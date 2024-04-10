@@ -12,6 +12,12 @@
     <link rel="stylesheet" href="~/assets/bootstrap-5.3.3-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/assets/bootstrap-5.3.3-dist/css/bootstrap-grid.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+
+        .custom-hover:hover {
+            color: white;
+        }
+    </style>
 </head>
 
 <body>
@@ -27,20 +33,26 @@
             <div class="nav flex-column nav-pills mt-5 text-center" id="v-pills-tab" role="tablist"
                  aria-orientation="vertical">
                 <h5 class="text-center text-uppercase">Home Page</h5>
-                <a class="nav-link mx-5 p-3  " style="display: inline-block;" id="v-pills-home-tab" data-toggle="pill"
+                <a class="nav-link mx-5 btn btn-primary border custom-hover p-3 border-1 border  " style="display: inline-block;" id="v-pills-home-tab" data-toggle="pill"
                    href="~/Admin/Category/list" role="tab" aria-controls="v-pills-home" aria-selected="true">CateGory</a>
-                <a class="nav-link mx-5 p-3 " style="display: inline-block;" id="v-pills-profile-tab" data-toggle="pill"
+                <a class="nav-link mx-5 btn btn-primary border custom-hover p-3 " style="display: inline-block;" id="v-pills-profile-tab" data-toggle="pill"
                    href="~/Admin/Course/list" role="tab" aria-controls="v-pills-profile" aria-selected="false">Course</a>
-                <a class="nav-link mx-5 p-3 " style="display: inline-block;" id="v-pills-messages-tab"
+                <a class="nav-link mx-5 btn btn-primary border custom-hover p-3 " style="display: inline-block;" id="v-pills-messages-tab"
                    data-toggle="pill" href="~/Admin/Class/list" role="tab" aria-controls="v-pills-messages"
                    aria-selected="false">Class</a>
-                <a class="nav-link mx-5 p-3 " style="display: inline-block;" id="v-pills-settings-tab"
-                   data-toggle="pill" href="~/Admin/Enrollment/list" role="tab" aria-controls="v-pills-settings"
-                   aria-selected="false">Erroment</a>
-                <a class="nav-link mx-5 p-3 " style="display: inline-block;" id="v-pills-settings-tab"
+                @if (user != null)
+                {
+                    if (user is WEB_MANGE_COURCE.Models.Admin admin1 && admin1.ro_id == 1)
+                    {
+                        <a class="nav-link mx-5 btn btn-primary border custom-hover p-3 " style="display: inline-block;" id="v-pills-settings-tab"
+                           data-toggle="pill" href="~/Admin/Enrollment/list" role="tab" aria-controls="v-pills-settings"
+                           aria-selected="false">Erroment</a>
+                    }
+                }
+                <a class="nav-link mx-5 p-3 btn btn-primary border custom-hover" style="display: inline-block;" id="v-pills-settings-tab"
                    data-toggle="pill" href="~/Admin/ManagerUser/listuser" role="tab" aria-controls="v-pills-settings"
                    aria-selected="false">User</a>
-                <a class="nav-link mx-5 p-3 " style="display: inline-block;" id="v-pills-settings-tab"
+                <a class="nav-link mx-5 p-3 btn btn-primary border custom-hover" style="display: inline-block;" id="v-pills-settings-tab"
                    data-toggle="pill" href="~/Admin/Schedule/listschedule" role="tab" aria-controls="v-pills-settings"
                    aria-selected="false">Schedule</a>
             </div>
@@ -66,7 +78,7 @@
                                 {
                                     <img src="@Url.Content("~/Uploads/" + admin.image)" style="height: 40px; width: 40px; border-radius: 50%;" />
                                 }
-                                else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 3)
+                                else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 2)
                                 {
                                     <img src="@Url.Content("~/Uploads/" + employ.image)" style="height: 40px; width: 40px; border-radius: 50%;" />
                                 }
@@ -80,7 +92,7 @@
                                     {
                                         @admin.username
                                     }
-                                    else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 3)
+                                    else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 2)
                                     {
                                         @employ.username
                                     }
@@ -93,21 +105,19 @@
                         </li>
                     </ul>
                 </div>
-            <!-- end header -->
+                <!-- end header -->
 
                 <hr class="d-flex justify-content-center" style="width: 90% ;">
 
                 <!--begin container -->
                 <!-- begin row1 -->
                 <div class="row">
-                    @RenderBody();
+                    @RenderBody()
                 </div>
                 <!-- end row 1 -->
                 <!-- begin row2 -->
-               
                 <!-- end  row2 -->
                 <!-- begin row 3 -->
-               
                 <!-- end row 3 -->
                 <!--end container -->
             </div>

@@ -9,7 +9,7 @@ namespace WEB_MANGE_COURCE.Areas.Admin.Controllers
 {
     public class CourseController : Controller
     {
-        private ma_scschedulesEntities1 db = new ma_scschedulesEntities1();
+        private ma_scschedulesEntities2 db = new ma_scschedulesEntities2();
         // GET: Admin/Course
         public ActionResult course()
         {
@@ -68,7 +68,7 @@ namespace WEB_MANGE_COURCE.Areas.Admin.Controllers
                     var list = db.Courses.ToList();
                     return View(list);
                 }
-                else if(user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 3)
+                else if(user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 2)
                 {
                     var list = db.Courses.ToList();
                     return View(list);

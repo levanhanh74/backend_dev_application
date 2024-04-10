@@ -22,13 +22,13 @@ namespace WEB_MANGE_COURCE.Models
         }
     
         public int student_id { get; set; }
+        public string image { get; set; }
         public string username { get; set; }
         public string password { get; set; }
         public string email { get; set; }
         public Nullable<int> ro_id { get; set; }
         public Nullable<int> class_id { get; set; }
         public Nullable<int> course_id { get; set; }
-        public string image { get; set; }
     
         public virtual Class Class { get; set; }
         public virtual Cours Cours { get; set; }

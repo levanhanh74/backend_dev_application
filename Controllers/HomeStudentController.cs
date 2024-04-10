@@ -5,17 +5,36 @@ using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Security.AccessControl;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using System.Web.UI.WebControls;
 using WEB_MANGE_COURCE.Models;
 
 namespace WEB_MANGE_COURCE.Controllers
 {
     public class HomeStudentController : Controller
     {
-        private ma_scschedulesEntities1 db =  new ma_scschedulesEntities1();
+
+        public static string GetMd5Hash(string input)
+        {
+            using (MD5 md5Hash = MD5.Create())
+            {
+                byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
+
+                StringBuilder sBuilder = new StringBuilder();
+                for (int i = 0; i < data.Length; i++)
+                {
+                    sBuilder.Append(data[i].ToString("x2"));
+                }
+
+                return sBuilder.ToString();
+            }
+        }
+        private ma_scschedulesEntities2 db =  new ma_scschedulesEntities2();
         public ActionResult Login()
         {
             List<Role> Role = db.Roles.ToList();  // get All role user 
@@ -24,16 +43,18 @@ namespace WEB_MANGE_COURCE.Controllers
         [HttpPost]
         public ActionResult PostLogin(string username, string password, int roles)
         {
+
+            string hashedPassword = GetMd5Hash(password);
             // Lấy thông tin người dùng từ cơ sở dữ liệu với username được cung cấp
-            var admin = db.Admins.FirstOrDefault(a => a.username == username && a.password == password && a.ro_id == roles);
-            var employees = db.Employees.FirstOrDefault(a => a.username == username && a.password == password && a.ro_id == roles);
-            var teachers = db.Teachers.FirstOrDefault(a => a.username == username && a.password == password && a.ro_id == roles);
-            var students = db.Students.FirstOrDefault(a => a.username == username && a.password == password && a.ro_id == roles);
+            var admin = db.Admins.FirstOrDefault(a => a.username == username && a.password == hashedPassword && a.ro_id == roles);
+            var employees = db.Employees.FirstOrDefault(a => a.username == username && a.password == hashedPassword && a.ro_id == roles);
+            var teachers = db.Teachers.FirstOrDefault(a => a.username == username && a.password == hashedPassword && a.ro_id == roles);
+            var students = db.Students.FirstOrDefault(a => a.username == username && a.password == hashedPassword && a.ro_id == roles);
 
 
 
             // Kiểm tra xem người dùng có tồn tại không và mật khẩu có đúng không
-            if (admin != null && VerifyPassword(admin.password, password))
+            if (admin != null && VerifyPassword(admin.password, hashedPassword))
             {
                 // lấy thông tin vai trò của người dùng từ cơ sở dữ liệu
                 var role = db.Roles.FirstOrDefault(r => r.ro_id == roles);
@@ -46,7 +67,7 @@ namespace WEB_MANGE_COURCE.Controllers
                     return RedirectToAction("Index", "HomeAdmin", new {area
                     = "Admin"});
                 }
-            }else if(employees != null && VerifyPassword(employees.password, password))
+            }else if(employees != null && VerifyPassword(employees.password, hashedPassword))
             {
                 // lấy thông tin vai trò của người dùng từ cơ sở dữ liệu
                 var role = db.Roles.FirstOrDefault(r => r.ro_id == roles);
@@ -63,7 +84,7 @@ namespace WEB_MANGE_COURCE.Controllers
                     });
                 }
             }
-            else if (teachers != null && VerifyPassword(teachers.password, password))
+            else if (teachers != null && VerifyPassword(teachers.password, hashedPassword))
             {
                 // lấy thông tin vai trò của người dùng từ cơ sở dữ liệu
                 var role = db.Roles.FirstOrDefault(r => r.ro_id == roles);
@@ -76,7 +97,7 @@ namespace WEB_MANGE_COURCE.Controllers
                     return RedirectToAction("Index", "Teacher", new {area=""});
                 }
             }
-            else if (students != null && VerifyPassword(students.password, password))
+            else if (students != null && VerifyPassword(students.password, hashedPassword))
             {
                 // lấy thông tin vai trò của người dùng từ cơ sở dữ liệu
                 var role = db.Roles.FirstOrDefault(r => r.ro_id == roles);
@@ -110,15 +131,15 @@ namespace WEB_MANGE_COURCE.Controllers
                 {
                     return View();
                 }
-                else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 3)
+                else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 2)
                 {
                     return View();
                 }
-                else if (user is WEB_MANGE_COURCE.Models.Teacher  teacher && teacher.ro_id == 4)
+                else if (user is WEB_MANGE_COURCE.Models.Teacher  teacher && teacher.ro_id == 3)
                 {
                     return RedirectToAction("Index", "Teacher", new {area=""});
                 }
-                else if (user is WEB_MANGE_COURCE.Models.Student student && student.ro_id == 5)
+                else if (user is WEB_MANGE_COURCE.Models.Student student && student.ro_id == 4)
                 {
                     return View();
                 }
@@ -128,8 +149,7 @@ namespace WEB_MANGE_COURCE.Controllers
 
    
         public ActionResult schedule()
-        {
-
+        { 
             var user = Session["user"];
             if (user != null)
             {
@@ -138,15 +158,16 @@ namespace WEB_MANGE_COURCE.Controllers
                     var schedule = db.Schedules.ToList();
                     return View();
                 }
-                else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 3)
+                else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 2)
                 {
                     var schedule = db.Schedules.ToList();
                     return View();
                 }
-                else if (user is WEB_MANGE_COURCE.Models.Teacher teacher && teacher.ro_id == 4)
+                else if (user is WEB_MANGE_COURCE.Models.Teacher teacher && teacher.ro_id == 3)
                 {
-                    return RedirectToAction("Index", "Teacher", new {area=""});
-                }  else if (user is WEB_MANGE_COURCE.Models.Student student && student.ro_id == 5)
+                    return RedirectToAction("Index", "Teacher", new { area = "" });
+                }
+                else if (user is WEB_MANGE_COURCE.Models.Student student && student.ro_id == 4)
                 {
 
                     var query = (from Schedule in db.Schedules
@@ -154,12 +175,13 @@ namespace WEB_MANGE_COURCE.Controllers
                                  join Course in db.Courses on Schedule.course_id equals Course.course_id
                                  join Teacher in db.Teachers on Schedule.teacher_id equals Teacher.teacher_id
                                  join Student in db.Students on Schedule.student_id equals Student.student_id
-                                 select new ScheduleInfo {
-                                    Schedule = Schedule,
-                                    Teacher = Teacher,
-                                    Student = Student,
-                                    Course = Course,
-                                    Class = Class
+                                 select new ScheduleInfo
+                                 {
+                                     Schedule = Schedule,
+                                     Teacher = Teacher,
+                                     Student = Student,
+                                     Course = Course,
+                                     Class = Class
                                  }).ToList();
 
 
@@ -182,7 +204,7 @@ namespace WEB_MANGE_COURCE.Controllers
                     // Đăng xuất Forms Authentication
                     FormsAuthentication.SignOut();
                 }
-                else if (user is WEB_MANGE_COURCE.Models.Employee empoly && empoly.ro_id == 3)
+                else if (user is WEB_MANGE_COURCE.Models.Employee empoly && empoly.ro_id == 2)
                 {
                     // Xóa Session user
                     Session.Remove("user");
@@ -190,13 +212,13 @@ namespace WEB_MANGE_COURCE.Controllers
                     FormsAuthentication.SignOut();
 
                 }
-                else if (user is WEB_MANGE_COURCE.Models.Teacher techer && techer.ro_id == 4)
+                else if (user is WEB_MANGE_COURCE.Models.Teacher techer && techer.ro_id == 3)
                 {
                     Session.Remove("user");
                     // Đăng xuất Forms Authentication
                     FormsAuthentication.SignOut();
                 }
-                else if (user is WEB_MANGE_COURCE.Models.Student student  && student.ro_id == 5)
+                else if (user is WEB_MANGE_COURCE.Models.Student student  && student.ro_id == 4)
                 {
                     Session.Remove("user");
                     // Đăng xuất Forms Authentication
@@ -217,15 +239,15 @@ namespace WEB_MANGE_COURCE.Controllers
                 {
                     return View();
                 }
-                else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 3)
+                else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 2)
                 {
                     return View();
                 }
-                else if (user is WEB_MANGE_COURCE.Models.Teacher teacher && teacher.ro_id == 4)
+                else if (user is WEB_MANGE_COURCE.Models.Teacher teacher && teacher.ro_id == 3)
                 {
                     return RedirectToAction("Index", "Teacher", new { area = "" });
                 }
-                else if (user is WEB_MANGE_COURCE.Models.Student student && student.ro_id == 5)
+                else if (user is WEB_MANGE_COURCE.Models.Student student && student.ro_id == 4)
                 {
                     return View();
                 }
@@ -254,7 +276,7 @@ namespace WEB_MANGE_COURCE.Controllers
                             // Lưu hình ảnh
                             image.SaveAs(path);
                             userID.username = username;
-                            userID.password = password;
+                            userID.password = GetMd5Hash(password);
                             userID.image = fileName;
                             Session["user"] = userID;
                             db.Entry(userID).State = System.Data.Entity.EntityState.Modified;
@@ -266,7 +288,7 @@ namespace WEB_MANGE_COURCE.Controllers
                     }
                     return View(username, password, image);
                 }
-                else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 3)
+                else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 2)
                 {
                     // Upload 
                     if (image != null && image.ContentLength > 0)
@@ -281,7 +303,7 @@ namespace WEB_MANGE_COURCE.Controllers
                             // Lưu hình ảnh
                             image.SaveAs(path);
                             userID.username = username;
-                            userID.password = password;
+                            userID.password = GetMd5Hash(password);
                             userID.image = fileName;
                             Session["user"] = userID;
                             db.Entry(userID).State = System.Data.Entity.EntityState.Modified;
@@ -292,11 +314,11 @@ namespace WEB_MANGE_COURCE.Controllers
                     }
                     return View(username, password, image);
                 }
-                else if (user is WEB_MANGE_COURCE.Models.Teacher teacher && teacher.ro_id == 4)
+                else if (user is WEB_MANGE_COURCE.Models.Teacher teacher && teacher.ro_id == 3)
                 {
                     return RedirectToAction("Error", "Error", new { area = "" });
                 }
-                else if (user is WEB_MANGE_COURCE.Models.Student student && student.ro_id == 5)
+                else if (user is WEB_MANGE_COURCE.Models.Student student && student.ro_id == 4)
                 {
                     if (image != null && image.ContentLength > 0)
                     {
@@ -310,7 +332,7 @@ namespace WEB_MANGE_COURCE.Controllers
                             // Lưu hình ảnh
                             image.SaveAs(path);
                             userID.username = username;
-                            userID.password = password;
+                            userID.password = GetMd5Hash(password);
                             userID.image = fileName;
                             Session["user"] = userID;
                             db.Entry(userID).State = System.Data.Entity.EntityState.Modified;

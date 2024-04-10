@@ -16,7 +16,7 @@
 
 
     <div class="row">
-        @RenderBody();
+        @RenderBody()
     </div>
 
 
@@ -37,6 +37,7 @@
             UrlLink.src = URL.createObjectURL(event.target.files[0])
         })
     </script>
+    @RenderSection("calendarSession", false)
 </body>
 
 </html>

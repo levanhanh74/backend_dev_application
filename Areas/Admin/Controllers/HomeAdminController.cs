@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -10,17 +12,34 @@ using WEB_MANGE_COURCE.Models;
 
 namespace WEB_MANGE_COURCE.Areas.Admin.Controllers
 {
-    public class HomeAdminController : Controller
+    public class HomeAdminController : Controller 
     {
         // GET: Admin/HomeAdmin
-        private ma_scschedulesEntities1 db = new ma_scschedulesEntities1();
+        private ma_scschedulesEntities2 db = new ma_scschedulesEntities2();
+
+
+        public static string GetMd5Hash(string input)
+        {
+            using (MD5 md5Hash = MD5.Create())
+            {
+                byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
+
+                StringBuilder sBuilder = new StringBuilder();
+                for (int i = 0; i < data.Length; i++)
+                {
+                    sBuilder.Append(data[i].ToString("x2"));
+                }
+
+                return sBuilder.ToString();
+            }
+        }
         public ActionResult Index()
         {
             var user = Session["user"];
            
            if(user != null) // have user 
             {
-                if (user is WEB_MANGE_COURCE.Models.Employee useremploy && useremploy.ro_id == 3)
+                if (user is WEB_MANGE_COURCE.Models.Employee useremploy && useremploy.ro_id == 2)
                 {
                     return View();
                 }
@@ -28,11 +47,11 @@ namespace WEB_MANGE_COURCE.Areas.Admin.Controllers
                 {
                     return View();
                 }
-                else if (user is WEB_MANGE_COURCE.Models.Student student && student.ro_id == 5)
+                else if (user is WEB_MANGE_COURCE.Models.Student student && student.ro_id == 4)
                 {
                     return RedirectToAction("Error", "Error", new { area = "Admin" });
                 }
-                else if (user is WEB_MANGE_COURCE.Models.Teacher teacher && teacher.ro_id == 4)
+                else if (user is WEB_MANGE_COURCE.Models.Teacher teacher && teacher.ro_id == 3)
                 {
                     return RedirectToAction("Error", "Error", new { area = "Admin" });
                 }
@@ -60,7 +79,7 @@ namespace WEB_MANGE_COURCE.Areas.Admin.Controllers
                 if(user is WEB_MANGE_COURCE.Models.Admin admin && admin.ro_id == 1)
                 {
                     return View();
-                }else if(user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 3)
+                }else if(user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 2)
                 {
                     return View();
                 }
@@ -91,7 +110,7 @@ namespace WEB_MANGE_COURCE.Areas.Admin.Controllers
                             // Lưu hình ảnh
                             image.SaveAs(path);
                             userID.username = username;
-                            userID.password = password;
+                            userID.password = GetMd5Hash(password);
                             userID.image = fileName;
                             Session["user"] = userID;
                             db.Entry(userID).State = System.Data.Entity.EntityState.Modified;
@@ -102,7 +121,7 @@ namespace WEB_MANGE_COURCE.Areas.Admin.Controllers
                     }
                     return View(username, password, image);
                     
-                }else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 3)
+                }else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 2)
                 {
                     if (image != null && image.ContentLength > 0)
                     {
@@ -116,7 +135,7 @@ namespace WEB_MANGE_COURCE.Areas.Admin.Controllers
                             // Lưu hình ảnh
                             image.SaveAs(path);
                             userID.username = username;
-                            userID.password = password;
+                            userID.password = GetMd5Hash(password);
                             userID.image = fileName;
                             Session["user"] = userID;
                             db.Entry(userID).State = System.Data.Entity.EntityState.Modified;
@@ -148,7 +167,7 @@ namespace WEB_MANGE_COURCE.Areas.Admin.Controllers
                     // Đăng xuất Forms Authentication
                     FormsAuthentication.SignOut();
                 }
-                else if (user is WEB_MANGE_COURCE.Models.Employee empoly && empoly.ro_id == 3)
+                else if (user is WEB_MANGE_COURCE.Models.Employee empoly && empoly.ro_id == 2)
                 {
                     // Xóa Session user
                     Session.Remove("user");
