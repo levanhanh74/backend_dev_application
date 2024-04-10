@@ -22,11 +22,11 @@ namespace WEB_MANGE_COURCE.Areas.Admin.Controllers
                     var role = db.Roles.ToList();
                     return View(role);
                 }
-                else if (user is WEB_MANGE_COURCE.Models.Employee useremploy && useremploy.ro_id == 3)
+                else if (user is WEB_MANGE_COURCE.Models.Employee useremploy && useremploy.ro_id == 2)
                 {
                     return RedirectToAction("Error", "Error", new { area = "Admin" });
                 }
-                else if (user is WEB_MANGE_COURCE.Models.Teacher teacher && teacher.ro_id == 4)
+                else if (user is WEB_MANGE_COURCE.Models.Teacher teacher && teacher.ro_id == 3)
                 {
                     return RedirectToAction("Error", "Error", new { area = "Admin" });
                 }
@@ -65,7 +65,7 @@ namespace WEB_MANGE_COURCE.Areas.Admin.Controllers
 
                             }
                             // add employee
-                            else if (ro_id == 3)
+                            else if (ro_id == 2)
                             {
                                 int id_em = new Random().Next(1, 1000);
                                 db.Employees.Add(new Models.Employee { username = username, password = password, image = image, ro_id = ro_id, emp_id = id_em });
@@ -73,7 +73,7 @@ namespace WEB_MANGE_COURCE.Areas.Admin.Controllers
                                 return RedirectToAction("listuser", "ManagerUser");
                             }
                             // add teacher
-                            else if (ro_id == 4)
+                            else if (ro_id == 3)
                             {
                                 int id_te = new Random().Next(1, 1000);
                                 db.Teachers.Add(new Models.Teacher { username = username, password = password, image = image, ro_id = ro_id, teacher_id = id_te });
@@ -81,7 +81,7 @@ namespace WEB_MANGE_COURCE.Areas.Admin.Controllers
                                 return RedirectToAction("listuser", "ManagerUser");
                             }
                             // add student
-                            else if (ro_id == 5)
+                            else if (ro_id == 4)
                             {
                                 int id_st = new Random().Next(1, 1000);
                                 db.Students.Add(new Models.Student { username = username, password = password, image = image, ro_id = ro_id, student_id = id_st });
@@ -104,17 +104,17 @@ namespace WEB_MANGE_COURCE.Areas.Admin.Controllers
                     }
                 }
                 // employ khong duoc add 
-                else if (user is WEB_MANGE_COURCE.Models.Employee employee && employee.ro_id == 3)
+                else if (user is WEB_MANGE_COURCE.Models.Employee employee && employee.ro_id == 2)
                 {
                     return RedirectToAction("Index", "HomeAdmin", new { area = "Admin" });
                 }
                 // teacher khong duoc add
-                else if (user is WEB_MANGE_COURCE.Models.Teacher teacher && teacher.ro_id == 4)
+                else if (user is WEB_MANGE_COURCE.Models.Teacher teacher && teacher.ro_id == 3)
                 {
                     return RedirectToAction("HomeStudent", "HomeStudent", new { area = "" });
                 }
                 // student khong duoc add
-                else if (user is WEB_MANGE_COURCE.Models.Student student && student.ro_id == 5)
+                else if (user is WEB_MANGE_COURCE.Models.Student student && student.ro_id == 4)
                 {
                     return RedirectToAction("HomeStudent", "HomeStudent", new { area = "" });
                 }
@@ -150,7 +150,7 @@ namespace WEB_MANGE_COURCE.Areas.Admin.Controllers
                     // Truyền danh sách người dùng đã kết hợp đến view để hiển thị
                     return View(userList);
                 }// list user employ
-                else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 3)
+                else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 2)
                 {
                     var adminList = db.Admins.ToList();
                     var employList = db.Employees.ToList();
@@ -165,7 +165,7 @@ namespace WEB_MANGE_COURCE.Areas.Admin.Controllers
                     // Truyền danh sách người dùng đã kết hợp đến view để hiển thị
                     return View(userList);
                 } // not list user teacher 
-                else if(user is WEB_MANGE_COURCE.Models.Teacher teacher && teacher.ro_id == 4)
+                else if(user is WEB_MANGE_COURCE.Models.Teacher teacher && teacher.ro_id == 3)
                 {
                     return RedirectToAction("Error", "Error", new { area = "" });
                 } // not list user student 

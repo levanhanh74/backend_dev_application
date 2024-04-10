@@ -77,7 +77,6 @@
           <Property Name="class_id" Type="int" />
           <Property Name="start_time" Type="time" Precision="7" />
           <Property Name="end_time" Type="time" Precision="7" />
-          <Property Name="day_of_week" Type="nvarchar" MaxLength="20" />
           <Property Name="status" Type="nvarchar" MaxLength="50" />
           <Property Name="date_week" Type="date" />
         </EntityType>
@@ -510,7 +509,6 @@
           <Property Name="class_id" Type="Int32" />
           <Property Name="start_time" Type="Time" Precision="7" />
           <Property Name="end_time" Type="Time" Precision="7" />
-          <Property Name="day_of_week" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Class" Relationship="Self.FK__Schedule__class___5EBF139D" FromRole="Schedule" ToRole="Class" />
           <NavigationProperty Name="Cours" Relationship="Self.FK__Schedule__course__5DCAEF64" FromRole="Schedule" ToRole="Courses" />
@@ -958,7 +956,6 @@
                 <ScalarProperty Name="class_id" ColumnName="class_id" />
                 <ScalarProperty Name="start_time" ColumnName="start_time" />
                 <ScalarProperty Name="end_time" ColumnName="end_time" />
-                <ScalarProperty Name="day_of_week" ColumnName="day_of_week" />
                 <ScalarProperty Name="status" ColumnName="status" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -110,15 +110,15 @@ namespace WEB_MANGE_COURCE.Controllers
                 {
                     return View();
                 }
-                else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 3)
+                else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 2)
                 {
                     return View();
                 }
-                else if (user is WEB_MANGE_COURCE.Models.Teacher  teacher && teacher.ro_id == 4)
+                else if (user is WEB_MANGE_COURCE.Models.Teacher  teacher && teacher.ro_id == 3)
                 {
                     return RedirectToAction("Index", "Teacher", new {area=""});
                 }
-                else if (user is WEB_MANGE_COURCE.Models.Student student && student.ro_id == 5)
+                else if (user is WEB_MANGE_COURCE.Models.Student student && student.ro_id == 4)
                 {
                     return View();
                 }
@@ -138,15 +138,15 @@ namespace WEB_MANGE_COURCE.Controllers
                     var schedule = db.Schedules.ToList();
                     return View();
                 }
-                else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 3)
+                else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 2)
                 {
                     var schedule = db.Schedules.ToList();
                     return View();
                 }
-                else if (user is WEB_MANGE_COURCE.Models.Teacher teacher && teacher.ro_id == 4)
+                else if (user is WEB_MANGE_COURCE.Models.Teacher teacher && teacher.ro_id == 3)
                 {
                     return RedirectToAction("Index", "Teacher", new {area=""});
-                }  else if (user is WEB_MANGE_COURCE.Models.Student student && student.ro_id == 5)
+                }  else if (user is WEB_MANGE_COURCE.Models.Student student && student.ro_id == 4)
                 {
 
                     var query = (from Schedule in db.Schedules
@@ -182,7 +182,7 @@ namespace WEB_MANGE_COURCE.Controllers
                     // Đăng xuất Forms Authentication
                     FormsAuthentication.SignOut();
                 }
-                else if (user is WEB_MANGE_COURCE.Models.Employee empoly && empoly.ro_id == 3)
+                else if (user is WEB_MANGE_COURCE.Models.Employee empoly && empoly.ro_id == 2)
                 {
                     // Xóa Session user
                     Session.Remove("user");
@@ -190,13 +190,13 @@ namespace WEB_MANGE_COURCE.Controllers
                     FormsAuthentication.SignOut();
 
                 }
-                else if (user is WEB_MANGE_COURCE.Models.Teacher techer && techer.ro_id == 4)
+                else if (user is WEB_MANGE_COURCE.Models.Teacher techer && techer.ro_id == 3)
                 {
                     Session.Remove("user");
                     // Đăng xuất Forms Authentication
                     FormsAuthentication.SignOut();
                 }
-                else if (user is WEB_MANGE_COURCE.Models.Student student  && student.ro_id == 5)
+                else if (user is WEB_MANGE_COURCE.Models.Student student  && student.ro_id == 4)
                 {
                     Session.Remove("user");
                     // Đăng xuất Forms Authentication
@@ -217,15 +217,15 @@ namespace WEB_MANGE_COURCE.Controllers
                 {
                     return View();
                 }
-                else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 3)
+                else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 2)
                 {
                     return View();
                 }
-                else if (user is WEB_MANGE_COURCE.Models.Teacher teacher && teacher.ro_id == 4)
+                else if (user is WEB_MANGE_COURCE.Models.Teacher teacher && teacher.ro_id == 3)
                 {
                     return RedirectToAction("Index", "Teacher", new { area = "" });
                 }
-                else if (user is WEB_MANGE_COURCE.Models.Student student && student.ro_id == 5)
+                else if (user is WEB_MANGE_COURCE.Models.Student student && student.ro_id == 4)
                 {
                     return View();
                 }
@@ -266,7 +266,7 @@ namespace WEB_MANGE_COURCE.Controllers
                     }
                     return View(username, password, image);
                 }
-                else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 3)
+                else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 2)
                 {
                     // Upload 
                     if (image != null && image.ContentLength > 0)
@@ -292,11 +292,11 @@ namespace WEB_MANGE_COURCE.Controllers
                     }
                     return View(username, password, image);
                 }
-                else if (user is WEB_MANGE_COURCE.Models.Teacher teacher && teacher.ro_id == 4)
+                else if (user is WEB_MANGE_COURCE.Models.Teacher teacher && teacher.ro_id == 3)
                 {
                     return RedirectToAction("Error", "Error", new { area = "" });
                 }
-                else if (user is WEB_MANGE_COURCE.Models.Student student && student.ro_id == 5)
+                else if (user is WEB_MANGE_COURCE.Models.Student student && student.ro_id == 4)
                 {
                     if (image != null && image.ContentLength > 0)
                     {

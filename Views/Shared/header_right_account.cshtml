@@ -14,15 +14,15 @@
                     {
                         <img src="@Url.Content("~/Uploads/" + admin.image)" style="height: 40px; width: 40px; border-radius: 50%;" />
                     }
-                    else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 3)
+                    else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 2)
                     {
                         <img src="@Url.Content("~/Uploads/" + employ.image)" style="height: 40px; width: 40px; border-radius: 50%;" />
                     }
-                    else if (user is WEB_MANGE_COURCE.Models.Teacher teacher && teacher.ro_id == 4)
+                    else if (user is WEB_MANGE_COURCE.Models.Teacher teacher && teacher.ro_id == 3)
                     {
                         <img src="@Url.Content("~/Uploads/" + teacher.image)" style="height: 40px; width: 40px; border-radius: 50%;" />
                     }
-                    else if (user is WEB_MANGE_COURCE.Models.Student student && student.ro_id == 5)
+                    else if (user is WEB_MANGE_COURCE.Models.Student student && student.ro_id == 4)
                     {
                         <img src="@Url.Content("~/Uploads/" + student.image)" style="height: 40px; width: 40px; border-radius: 50%;" />
                     }
@@ -36,15 +36,15 @@
                         {
                             @admin.username
                         }
-                        else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 3)
+                        else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 2)
                         {
                             @employ.username
                         }
-                        else if (user is WEB_MANGE_COURCE.Models.Teacher teacher && teacher.ro_id == 4)
+                        else if (user is WEB_MANGE_COURCE.Models.Teacher teacher && teacher.ro_id == 3)
                         {
                             @teacher.username
                         }
-                        else if (user is WEB_MANGE_COURCE.Models.Student student && student.ro_id == 5)
+                        else if (user is WEB_MANGE_COURCE.Models.Student student && student.ro_id == 4)
                         {
                             @student.username
                         }
@@ -55,11 +55,11 @@
                     <li>
                         @if (user != null)
                         {
-                            if  (user is WEB_MANGE_COURCE.Models.Teacher teacher && teacher.ro_id == 4)
+                            if  (user is WEB_MANGE_COURCE.Models.Teacher teacher && teacher.ro_id == 3)
                             {
                                 <a class="dropdown-item" href="~/Teacher/profile">Profile</a>
                             }
-                            else if (user is WEB_MANGE_COURCE.Models.Student student && student.ro_id == 5)
+                            else if (user is WEB_MANGE_COURCE.Models.Student student && student.ro_id == 4)
                             {
                                 <a class="dropdown-item" href="~/HomeStudent/profile">Profile</a>
                             }
@@ -75,15 +75,15 @@
                             {
                                 <a class="dropdown-item" href="@Url.Action("Logout", "HomeAdmin", new { area = "Admin" })">Logout</a>
                             }
-                            else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 3)
+                            else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 2)
                             {
                                 <a class="dropdown-item" href="@Url.Action("Logout", "HomeAdmin", new { area = "Admin" })">Logout</a>
                             }
-                            else if (user is WEB_MANGE_COURCE.Models.Teacher teacher && teacher.ro_id == 4)
+                            else if (user is WEB_MANGE_COURCE.Models.Teacher teacher && teacher.ro_id == 3)
                             {
                                 <a class="dropdown-item" href="@Url.Action("Logout", "Teacher", new { area = "" })">Logout</a>
                             }
-                            else if (user is WEB_MANGE_COURCE.Models.Student student && student.ro_id == 5)
+                            else if (user is WEB_MANGE_COURCE.Models.Student student && student.ro_id == 4)
                             {
                                 <a class="dropdown-item" href="@Url.Action("Logout", "HomeStudent", new { area = "" })">Logout</a>
                             }

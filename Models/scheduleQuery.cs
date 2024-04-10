@@ -19,7 +19,6 @@ namespace WEB_MANGE_COURCE.Models
         public string Role { get; set; }
         public TimeMeasure Starttime { get; set; }
         public TimeMeasure Endtime { get; set; }
-        public TimeMeasure dayOfWeek { get; set; }
         public string status { get; set; }
         public TimeMeasure dateWeek { get; set; }
     }

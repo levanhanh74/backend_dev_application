@@ -13,42 +13,76 @@
     <!-- end header -->
     <!-- begin time -->
     <div class="row">
-        <div class="col-3">
+        @*<div class="col-3">
             <label for="" class="d-block">Year</label>
             <select class="w-100" name="" id="">
                 <option value="2024">2024</option>
             </select>
-        </div>
+        </div>*@
+     
         <div class="col-3">
-            <label for="" class="d-block">Weekly</label>
-            <select class="w-100" name="" id="">
-                <option value="2024">22/04 to 28/04</option>
+            <label for="weekly" class="d-block">Weekly</label>
+            <select class="w-100" id="weekly">
             </select>
         </div>
         <div class="col-3">
-            <label for="" class="d-block">Monday</label>
-            <select class="w-100" name="" id="">
-                <option value="2024">22/04 to 28/04</option>
+            <label for="monday" class="d-block">YEAR</label>
+            <select class="w-100" id="year">
+                @{
+                    var currentYear = DateTime.Now.Year;
+                    for (int year = currentYear - 10; year <= currentYear + 10; year++)
+                    {
+                        <option value="@year">@year</option>
+                    }
+                }
             </select>
         </div>
+
+        <script>
+            // Hàm để thêm các option vào một select element
+            function addOptions(selectElement, startDate, endDate) {
+                for (var currentDate = startDate; currentDate <= endDate; currentDate.setDate(currentDate.getDate() + 1)) {
+                    var option = document.createElement("option");
+                    option.text = currentDate.toLocaleDateString();
+                    option.value = currentDate.toLocaleDateString("en-CA"); // Format ngày tháng để tránh vấn đề với các ngôn ngữ khác
+                    selectElement.add(option);
+                }
+            }
+
+            // Lấy các select element
+            var weeklySelect = document.getElementById("weekly");
+            var mondaySelect = document.getElementById("monday");
+
+            // Tạo ngày bắt đầu và kết thúc cho tuần và thứ Hai
+            var startDate = new Date();
+            var currentDate = new Date();
+            currentDate.setFullYear(currentDate.getFullYear() + 1);
+            var endDate = currentDate;
+
+            // Thêm các option cho select element
+            addOptions(weeklySelect, startDate, endDate);
+            //addOptions(mondaySelect, startDate, endDate);
+        </script>
+
     </div>
     <div class="d-flex justify-content-end">
         <a href="" class="btn btn-primary">Edit Schedule</a>
     </div>
-    <!-- end time -->
-    <!-- begin table time -->
-    <ul style="list-style:none">
+
+   @* <ul style="list-style:none">
         @foreach (var item in Model)
         {
-            <li>Course.course_id: @item.Course.course_id</li>
             <li>Course.title: @item.Course.title</li>
-            <li>Class.class_id: @item.Class.class_id</li>
             <li>Class.class_name: @item.Class.class_name</li>
             <li>Student.username: @item.Student.username</li>
             <li>Teacher.username: @item.Teacher.username</li>
-            <li>Teacher.username: @item.Schedule.username</li>
+            <li>Schedule.status: @item.Schedule.status</li>
+            <li>Schedule.start_time: @item.Schedule.start_time</li>
+            <li>Schedule.end_time: @item.Schedule.end_time</li>
+            <li>Schedule.dayweek: @item.Schedule.day_of_week</li>
         }
-    </ul>
+    </ul>*@
+
     <table class="table overflow-scroll mt-4">
 
         <thead>
@@ -63,49 +97,66 @@
                 <th scope="col">Sun</th>
             </tr>
             <tr>
-                <th></th>
-                <th>30/05</th>
-                <th>01/06</th>
-                <th>02/06</th>
-                <th>03/06</th>
-                <th>04/06</th>
-                <th>05/06</th>
-                <th>06/06</th>
+                <th scope="col"></th>
+                @{
+                    DateTime ngayHienTai = DateTime.Now;
+                    DateTime ngaySau6Ngay = ngayHienTai.AddDays(6);
+                    string dinhDangNgay = "dd-MM-yyyy";
+
+                    DateTime startDate = DateTime.ParseExact(ngayHienTai.ToString(dinhDangNgay), dinhDangNgay, null);
+                    DateTime endDate = DateTime.ParseExact(ngaySau6Ngay.ToString(dinhDangNgay), dinhDangNgay, null);
+
+                    // Tạo danh sách các ngày
+                    List<DateTime> days = new List<DateTime>();
+                    for (DateTime date = startDate; date <= endDate; date = date.AddDays(1))
+                    {
+                        days.Add(date);
+                    }
+                }
+
+                <!-- Tạo các thẻ thống kê cho từng ngày trong danh sách -->
+                @foreach (DateTime day in days)
+                {
+                    <th>@day.ToString("dd/MM")</th>
+                }
             </tr>
         </thead>
         <tbody>
 
             <tr>
-                <th scope="row">9:00:00</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>mdo</td>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>mdo</td>
+                <th scope="row">07:00:00 <br />---TO---<br /> 11:00:00</th>
+                @for (int i = 0; i <= 6; i++)
+                {
+                    <td>
+                        @foreach (var item in Model)
+                        {
+                            if (@item.Schedule.date_week == days[i] && @item.Schedule.start_time == TimeSpan.Parse("07:00:00"))
+                            {
+                                @item.Course.title <br>
+                                @item.Teacher.username <br>
+                                @item.Schedule.status <br>
+                            }
+                        }
+                    </td>
+                }
             </tr>
+
             <tr>
-            </tr>
-            <tr>
-                <th scope="row">12:00:00</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>mdo</td>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>mdo</td>
-            </tr>
-            <tr>
-                <th scope="row">14:00:00</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>mdo</td>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>mdo</td>
+                <th scope="row">13:00:00 <br />---TO---<br /> 17:00:00</th>
+                @for (int i = 0; i <= 6; i++)
+                {
+                    <td>
+                        @foreach (var item in Model)
+                        {
+                            if (@item.Schedule.date_week == days[i] && @item.Schedule.start_time == TimeSpan.Parse("13:00:00"))
+                            {
+                                @item.Course.title <br>
+                                @item.Teacher.username <br>
+                                @item.Schedule.status <br>
+                            }
+                        }
+                    </td>
+                }
             </tr>
         </tbody>
     </table>

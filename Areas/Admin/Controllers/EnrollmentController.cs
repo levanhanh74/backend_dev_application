@@ -27,10 +27,10 @@ namespace WEB_MANGE_COURCE.Areas.Admin.Controllers
                     var students = db.Students.ToList();
                     ViewBag.StudentList = new SelectList(students, "student_id", "username"); // Assuming FullName is the property representing student's 
                     return View();
-                }else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 3)
+                }else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 2)
                 {
                     return RedirectToAction("Error", "Error", new {area ="Admin"});
-                }else if (user is WEB_MANGE_COURCE.Models.Teacher teacher && teacher.ro_id == 4)
+                }else if (user is WEB_MANGE_COURCE.Models.Teacher teacher && teacher.ro_id == 3)
                 {
                     return RedirectToAction("Error", "Error", new { area = "Admin" });
                 }
@@ -65,11 +65,11 @@ namespace WEB_MANGE_COURCE.Areas.Admin.Controllers
                     // Nếu dữ liệu không hợp lệ, hiển thị lại biểu mẫu với thông báo lỗi
                     return View(data);
                 }
-                else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 3)
+                else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 2)
                 {
                     return RedirectToAction("Error", "Error", new { area = "Admin" });
                 }
-                else if (user is WEB_MANGE_COURCE.Models.Teacher teacher && teacher.ro_id == 4)
+                else if (user is WEB_MANGE_COURCE.Models.Teacher teacher && teacher.ro_id == 3)
                 {
                     return RedirectToAction("Error", "Error", new { area = "Admin" });
                 }

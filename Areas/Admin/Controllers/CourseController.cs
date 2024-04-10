@@ -68,7 +68,7 @@ namespace WEB_MANGE_COURCE.Areas.Admin.Controllers
                     var list = db.Courses.ToList();
                     return View(list);
                 }
-                else if(user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 3)
+                else if(user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 2)
                 {
                     var list = db.Courses.ToList();
                     return View(list);

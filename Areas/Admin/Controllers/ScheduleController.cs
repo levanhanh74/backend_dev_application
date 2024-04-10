@@ -54,7 +54,7 @@ namespace WEB_MANGE_COURCE.Areas.Admin.Controllers
                     // Pass the model to the view
                     return View();
                 }
-                else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 3)
+                else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 2)
                 {
                     var courseList = db.Courses.ToList();
                     var teacherList = db.Teachers.ToList();
@@ -123,7 +123,7 @@ namespace WEB_MANGE_COURCE.Areas.Admin.Controllers
                     }
                 }
                 // employ can add schedule for student with teach
-                else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 3)
+                else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 2)
                 {
                     if (ModelState.IsValid) // Check if the model state is valid
                     {
@@ -160,7 +160,7 @@ namespace WEB_MANGE_COURCE.Areas.Admin.Controllers
                     // Pass schedules to the view
                     return View(schedules);
                 }
-                 else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 3)
+                 else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 2)
                 {
                     var schedules = db.Schedules.ToList();
 

@@ -21,7 +21,6 @@ namespace WEB_MANGE_COURCE.Models
         public Nullable<int> class_id { get; set; }
         public Nullable<System.TimeSpan> start_time { get; set; }
         public Nullable<System.TimeSpan> end_time { get; set; }
-        public string day_of_week { get; set; }
         public string status { get; set; }
         public Nullable<System.DateTime> date_week { get; set; }
     

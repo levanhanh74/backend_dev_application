@@ -22,7 +22,7 @@ namespace WEB_MANGE_COURCE.Areas.Admin.Controllers
                     ViewBag.Teachers = new SelectList(teachers, "teacher_id", "username");
                     return View();
                 }
-                else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 3)
+                else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 2)
                 {
                     var teachers = db.Teachers.ToList();
                     ViewBag.Teachers = new SelectList(teachers, "teacher_id", "username");
@@ -57,7 +57,7 @@ namespace WEB_MANGE_COURCE.Areas.Admin.Controllers
 
                     // Nếu dữ liệu không hợp lệ, hiển thị lại biểu mẫu với thông báo lỗi
                     return View(data);
-                }else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 3)
+                }else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 2)
                 {
                     if (ModelState.IsValid)
                     {
@@ -90,7 +90,7 @@ namespace WEB_MANGE_COURCE.Areas.Admin.Controllers
                     var list = db.Classes.ToList();
                     return View(list);
                 }
-                else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 3) {
+                else if (user is WEB_MANGE_COURCE.Models.Employee employ && employ.ro_id == 2) {
                     var list = db.Classes.ToList();
                     return View(list);
                 }

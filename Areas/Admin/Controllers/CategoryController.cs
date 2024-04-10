@@ -21,10 +21,10 @@ namespace WEB_MANGE_COURCE.Areas.Admin.Controllers
                  if (user is WEB_MANGE_COURCE.Models.Admin useradmin && useradmin.ro_id == 1)
             {
                 return View();
-            }else if (user is WEB_MANGE_COURCE.Models.Employee useremploy && useremploy.ro_id == 3)
+            }else if (user is WEB_MANGE_COURCE.Models.Employee useremploy && useremploy.ro_id == 2)
             {
                 return View();
-            }else if(user is WEB_MANGE_COURCE.Models.Admin teacher && teacher.ro_id == 4) {
+            }else if(user is WEB_MANGE_COURCE.Models.Admin teacher && teacher.ro_id == 3) {
                 return RedirectToAction("Index", "HomeTeacher", new { area = "Teacher" });
             } else
             {
@@ -59,7 +59,7 @@ namespace WEB_MANGE_COURCE.Areas.Admin.Controllers
                     // Nếu dữ liệu không hợp lệ, hiển thị lại biểu mẫu với thông báo lỗi
                     return View(category);
                 }
-                else if (user is WEB_MANGE_COURCE.Models.Employee useremploy && useremploy.ro_id == 3)
+                else if (user is WEB_MANGE_COURCE.Models.Employee useremploy && useremploy.ro_id == 2)
                 {
                     if (ModelState.IsValid)
                     {
@@ -89,12 +89,12 @@ namespace WEB_MANGE_COURCE.Areas.Admin.Controllers
                 var listCate = db.Categories.ToList();
                 return View(listCate);
             }
-            else if (user is WEB_MANGE_COURCE.Models.Employee useremploy && useremploy.ro_id == 3)
+            else if (user is WEB_MANGE_COURCE.Models.Employee useremploy && useremploy.ro_id == 2)
             {
                 var listCate = db.Categories.ToList();
                 return View(listCate);
             }
-            else if (user is WEB_MANGE_COURCE.Models.Admin teacher && teacher.ro_id == 4)
+            else if (user is WEB_MANGE_COURCE.Models.Admin teacher && teacher.ro_id == 3)
             {
                 return RedirectToAction("Index", "Teacher", new { area = "" });
             }
