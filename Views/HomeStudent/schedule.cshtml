@@ -65,87 +65,125 @@
         </script>
 
     </div>
-    <div class="d-flex justify-content-end">
-        <a href="" class="btn btn-primary">Edit Schedule</a>
-    </div>
+    @*<div class="d-flex justify-content-end">
+            <a href="" class="btn btn-primary">Edit Schedule</a>
+        </div>*@
 
-    <table class="table overflow-scroll mt-4">
+    <div class="col-8">
+        <table class="table overflow-scroll mt-4 border">
 
-        <thead>
-            <tr>
-                <th scope="col"></th>
-                <th scope="col">Mon</th>
-                <th scope="col">Tue</th>
-                <th scope="col">Wed</th>
-                <th scope="col">Thu</th>
-                <th scope="col">Fri</th>
-                <th scope="col">Sat</th>
-                <th scope="col">Sun</th>
-            </tr>
-            <tr>
-                <th scope="col"></th>
-                @{
-                    DateTime ngayHienTai = DateTime.Now;
-                    DateTime ngaySau6Ngay = ngayHienTai.AddDays(6);
-                    string dinhDangNgay = "dd-MM-yyyy";
+            <thead>
+                <tr class="border">
+                    <th scope="col"></th>
+                    <th scope="col" class="border">Mon</th>
+                    <th scope="col" class="border">Wed</th>
+                    <th scope="col" class="border">Thu</th>
+                    <th scope="col" class="border">Fri</th>
+                    <th scope="col" class="border">Sat</th>
+                    <th scope="col" class="border">Sun</th>
+                </tr>
+                <tr class="border">
+                    <th scope="col"></th>
+                    @{
+                        DateTime ngayHienTai = DateTime.Now;
+                        DateTime ngaySau6Ngay = ngayHienTai.AddDays(6);
+                        string dinhDangNgay = "dd-MM-yyyy";
 
-                    DateTime startDate = DateTime.ParseExact(ngayHienTai.ToString(dinhDangNgay), dinhDangNgay, null);
-                    DateTime endDate = DateTime.ParseExact(ngaySau6Ngay.ToString(dinhDangNgay), dinhDangNgay, null);
+                        DateTime startDate = DateTime.ParseExact(ngayHienTai.ToString(dinhDangNgay), dinhDangNgay, null);
+                        DateTime endDate = DateTime.ParseExact(ngaySau6Ngay.ToString(dinhDangNgay), dinhDangNgay, null);
 
-                    // Tạo danh sách các ngày
-                    List<DateTime> days = new List<DateTime>();
-                    for (DateTime date = startDate; date <= endDate; date = date.AddDays(1))
-                    {
-                        days.Add(date);
+                        // Tạo danh sách các ngày
+                        List<DateTime> days = new List<DateTime>();
+                        for (DateTime date = startDate; date <= endDate; date = date.AddDays(1))
+                        {
+                            days.Add(date);
+                        }
                     }
-                }
 
-                <!-- Tạo các thẻ thống kê cho từng ngày trong danh sách -->
-                @foreach (DateTime day in days)
-                {
-                    <th>@day.ToString("dd/MM")</th>
-                }
-            </tr>
-        </thead>
-        <tbody>
+                    <!-- Tạo các thẻ thống kê cho từng ngày trong danh sách -->
+                    @foreach (DateTime day in days)
+                    {
+                        <th class="border">@day.ToString("dd/MM")</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
 
-            <tr>
-                <th scope="row">07:00:00 <br />---TO---<br /> 11:00:00</th>
-                @for (int i = 0; i <= 6; i++)
-                {
-                    <td>
-                        @foreach (var item in Model)
-                        {
-                            if (@item.Schedule.date_week == days[i] && @item.Schedule.start_time == DateTime.Parse("07:00:00"))
+                <tr class="border">
+                    <th class="border" scope="row">07:00:00 <br />---TO---<br /> 09:00:00</th>
+                    @for (int i = 0; i <= 6; i++)
+                    {
+                        <td class="border">
+                            @foreach (var item in Model)
                             {
-                                @item.Course.title <br>
-                                @item.Teacher.username <br>
-                                @item.Schedule.status <br>
+                                if (@item.Schedule.date_week == days[i] && @item.Schedule.start_time == DateTime.Parse("07:00:00"))
+                                {
+                                    @item.Course.title <br>
+                                    @item.Teacher.username <br>
+                                    @item.Schedule.status <br>
+                                }
                             }
-                        }
-                    </td>
-                }
-            </tr>
+                        </td>
+                    }
+                </tr>
 
-            <tr>
-                <th scope="row">13:00:00 <br />---TO---<br /> 17:00:00</th>
-                @for (int i = 0; i <= 6; i++)
-                {
-                    <td>
-                        @foreach (var item in Model)
-                        {
-                            if (@item.Schedule.date_week == days[i] && @item.Schedule.start_time == DateTime.Parse("13:00:00"))
+                <tr class="border">
+                    <th class="border" scope="row">10:00:00 <br />---TO---<br /> 12:00:00</th>
+                    @for (int i = 0; i <= 6; i++)
+                    {
+                        <td class="border">
+                            @foreach (var item in Model)
                             {
-                                @item.Course.title <br>
-                                @item.Teacher.username <br>
-                                @item.Schedule.status <br>
+                                if (@item.Schedule.date_week == days[i] && @item.Schedule.start_time == DateTime.Parse("10:00:00"))
+                                {
+                                    @item.Course.title <br>
+                                    @item.Teacher.username <br>
+                                    @item.Schedule.status <br>
+                                }
                             }
-                        }
-                    </td>
-                }
-            </tr>
-        </tbody>
-    </table>
+                        </td>
+                    }
+                </tr>
+
+                <tr class="border">
+                    <th class="border" scope="row">13:00:00 <br />---TO---<br /> 15:00:00</th>
+                    @for (int i = 0; i <= 6; i++)
+                    {
+                        <td class="border">
+                            @foreach (var item in Model)
+                            {
+                                if (@item.Schedule.date_week == days[i] && @item.Schedule.start_time == DateTime.Parse("13:00:00"))
+                                {
+                                    @item.Course.title <br>
+                                    @item.Teacher.username <br>
+                                    @item.Schedule.status <br>
+                                }
+                            }
+                        </td>
+                    }
+                </tr>
+
+                <tr class="border">
+                    <th class="border" scope="row">16:00:00 <br />---TO---<br /> 18:00:00</th>
+                    @for (int i = 0; i <= 6; i++)
+                    {
+                        <td class="border">
+                            @foreach (var item in Model)
+                            {
+                                if (@item.Schedule.date_week == days[i] && @item.Schedule.start_time == DateTime.Parse("13:00:00"))
+                                {
+                                    @item.Course.title <br>
+                                    @item.Teacher.username <br>
+                                    @item.Schedule.status <br>
+                                }
+                            }
+                        </td>
+                    }
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
     <!-- end table time -->
 
 </div>

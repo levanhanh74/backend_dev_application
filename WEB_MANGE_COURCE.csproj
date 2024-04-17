@@ -293,7 +293,6 @@
     <Content Include="Areas\Admin\Views\Class\Index.cshtml" />
     <Content Include="Areas\Admin\Views\ManagerUser\user.cshtml" />
     <Content Include="Areas\Admin\Views\ManagerUser\listuser.cshtml" />
-    <Content Include="Areas\Admin\Views\Schedule\schedule.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\row2.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\row3.cshtml" />
     <Content Include="Areas\Admin\Views\Enrollment\Index.cshtml" />
@@ -305,6 +304,7 @@
     <Content Include="Models\Model1.edmx.diagram">
       <DependentUpon>Model1.edmx</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Views\Schedule\schedule.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

@@ -14,6 +14,9 @@
     <div class="row">
         <div class="col-md-6">
             <div class="form-group">
+                <input type="number" class="form-control" name="schedule_id" placeholder="ID.." >
+            </div>
+            <div class="form-group">
                 @Html.LabelFor(model => model.teacher_id, "Teacher", htmlAttributes: new { @class = "control-label" })
                 <div>
                     @Html.DropDownList("teacher_id", null, "-- Select Teacher --", htmlAttributes: new { @class = "form-control" })
@@ -50,7 +53,12 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.start_time, "Start Time", htmlAttributes: new { @class = "control-label" })
                 <div>
-                    @Html.EditorFor(model => model.start_time, new { htmlAttributes = new { @class = "form-control", placeholder = "Start Time" } })
+                    <select class="form-control" id="start_time" name="start_time">
+                        <option value="07:00">07:00</option>
+                        <option value="10:00">10:00</option>
+                        <option value="13:00">13:00</option>
+                        <option value="16:00">16:00</option>
+                    </select>
                     @Html.ValidationMessageFor(model => model.start_time, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -58,10 +66,22 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.end_time, "End Time", htmlAttributes: new { @class = "control-label" })
                 <div>
-                    @Html.EditorFor(model => model.end_time, new { htmlAttributes = new { @class = "form-control", placeholder = "End Time" } })
+                    @Html.EditorFor(model => model.end_time, new { htmlAttributes = new { @class = "form-control", placeholder = "End Time", onchange = "validateEndTime(this.value)" } })
                     @Html.ValidationMessageFor(model => model.end_time, "", new { @class = "text-danger" })
                 </div>
             </div>
+
+            <script>
+                function validateEndTime(endTime) {
+                    var startTime = document.getElementById("start_time").value;
+                    if (startTime && endTime) {
+                        if (startTime >= endTime) {
+                            alert("End time must be greater than start time.");
+                            document.getElementById("end_time").value = ''; // Clear the end time input
+                        }
+                    }
+                }
+            </script>
 
             <div class="form-group">
                 @Html.LabelFor(model => model.date_week, "Day of Week", htmlAttributes: new { @class = "control-label" })
